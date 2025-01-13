@@ -24,6 +24,8 @@ services:
       - db_data:/var/lib/mysql
     ports:
       - "3306:3306"
+    environment:
+      - TZ=Europe/Paris # Set the timezone to Paris
 
   phpmyadmin:
     image: phpmyadmin:latest
