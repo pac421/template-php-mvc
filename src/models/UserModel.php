@@ -10,6 +10,7 @@ class UserModel
     $statement->bindParam(':email', $email);
     $statement->execute();
     $result = $statement->fetchAll();
+    if (count($result) == 0) return null;
     return $result[0];
   }
 
