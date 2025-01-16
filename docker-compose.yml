@@ -12,6 +12,7 @@ services:
       - "8080:80"
     depends_on:
       - db
+      - mongodb
     env_file:
       - .env
 
@@ -27,6 +28,19 @@ services:
     environment:
       - TZ=Europe/Paris # Set the timezone to Paris
 
+  mongodb:
+    image: mongo:6.0
+    container_name: mongodb
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
   phpmyadmin:
     image: phpmyadmin:latest
     container_name: phpmyadmin
@@ -39,3 +53,4 @@ services:
 
 volumes:
   db_data:
+  mongo_data:
